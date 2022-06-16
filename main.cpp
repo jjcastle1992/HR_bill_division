@@ -15,18 +15,33 @@ vector<string> split(const string &);
  *  3. INTEGER b
  */
 
-void bonAppetit(vector<int> bill, int k, int b) {
-    //Figure out the total cost of the bill. Loop through array and sum total.
+void bonAppetit(vector<int> bill, int indexItemNotEaten, int annaCash) {
+    int billTotal = 0;
+    int sharedBillTotal = 0;
+    int annaSplit = 0;
+    int refund = 0;
 
-    //Figure out the cost of the item Anna did not eat (k)
+    //Figure out the total cost of the bill. Loop through array and sum total.
+    for (int i = 0; i < bill.size(); i++) {
+        billTotal += bill[i];
+    }
+
+    //Figure out the cost of the item Anna did not eat (indexItemNotEaten)
+    int costOfItemNotEaten = bill[indexItemNotEaten];
 
     //Divide the remaining amount by 2 to determine the amount that Anna owes
+    annaSplit = ((billTotal - costOfItemNotEaten) / 2 );
 
-    //Check the amount of money b Anna contributed to the bill
-
-    //Refund = Amount Paid (b) - Even split (less item not eaten).
+    //Refund = annaCash - Even split (less item not eaten).
+    refund = annaCash - annaSplit;
 
     //If Anna contributed the right amount, print Bon Appetit. Else print the int amount Brian owes Anna
+    if (refund == 0) {
+        std::cout << "Bon Appetit" << std::endl;
+    }
+    else {
+        std::cout << refund << std::endl;
+    }
 
 }
 
