@@ -17,7 +17,6 @@ vector<string> split(const string &);
 
 void bonAppetit(vector<int> bill, int indexItemNotEaten, int annaCash) {
     int billTotal = 0;
-    int sharedBillTotal = 0;
     int annaSplit = 0;
     int refund = 0;
 
@@ -61,20 +60,27 @@ int main()
 
     vector<string> bill_temp = split(rtrim(bill_temp_temp));
 
-    vector<int> bill(n);
+    if (n >= 2 && n <= 1e5) {
+        int runningTotal = 0;
+        vector<int> bill(n);
 
-    for (int i = 0; i < n; i++) {
-        int bill_item = stoi(bill_temp[i]);
+        for (int i = 0; i < n; i++) {
+            int bill_item = stoi(bill_temp[i]);
 
-        bill[i] = bill_item;
+            if (bill_item >= 0 && bill_item <= 1e4) {
+                bill[i] = bill_item;
+                runningTotal += bill_item;
+            }
+        }
+
+        string b_temp;
+        getline(cin, b_temp);
+
+        int b = stoi(ltrim(rtrim(b_temp)));
+        if ((k >= 0 && k <= n) && (b >= 0 && b <= runningTotal)){
+            bonAppetit(bill, k, b);
+        }
     }
-
-    string b_temp;
-    getline(cin, b_temp);
-
-    int b = stoi(ltrim(rtrim(b_temp)));
-
-    bonAppetit(bill, k, b);
 
     return 0;
 }
